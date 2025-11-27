@@ -24,8 +24,35 @@
 
                     <!-- CONTENT BERUBAH -->
                     <div id="day-content" class="p-3 border rounded" style="background:#f8f9fa;">
-                        <h5 class="fw-bold mb-2">Bangun Pagi</h5>
-                        <p>Mulai hari lebih awal agar lebih produktif dan fokus.</p>
+                        <div id="content-1" class="day-section">
+                            @include('inputHarian.bangun')
+                        </div>
+
+                        <div id="content-2" class="day-section d-none">
+                            @include('inputHarian.ibadah')
+                        </div>
+
+                        <div id="content-3" class="day-section d-none">
+                            @include('inputHarian.olahraga')
+                        </div>
+
+                        {{-- <div id="content-4" class="day-section d-none">
+                            @include('inputHarian.makan')
+                        </div>
+
+                        <div id="content-5" class="day-section d-none">
+                            @include('inputHarian.belajar')
+                        </div>
+
+                        <div id="content-6" class="day-section d-none">
+                            @include('inputHarian.membantu')
+                        </div>
+
+                        <div id="content-7" class="day-section d-none">
+                            @include('inputHarian.tidur')
+                        </div> --}}
+
+
                     </div>
 
                 </div>
@@ -34,6 +61,8 @@
     </div>
 @endsection
 @section('page-style')
+    @include('inputHarian.css.ibadah')
+    @include('inputHarian.css.olahraga')
     <style>
         .day-slider {
             display: flex;
@@ -64,54 +93,12 @@
             border-color: #0056d2;
         }
     </style>
+
 @endsection
+
 @section('page-script')
-    <script>
-        const contents = {
-            1: {
-                title: "Bangun Pagi",
-                text: "Mulai hari lebih awal agar lebih produktif dan fokus."
-            },
-            2: {
-                title: "Beribadah",
-                text: "Mengisi hari dengan kebiasaan baik yang membangun karakter."
-            },
-            3: {
-                title: "Olahraga",
-                text: "Menjaga kesehatan fisik agar tetap bugar sepanjang hari."
-            },
-            4: {
-                title: "Makan Sehat",
-                text: "Konsumsi makanan bergizi untuk memenuhi nutrisi harian."
-            },
-            5: {
-                title: "Gemar Belajar",
-                text: "Meningkatkan wawasan dan kecerdasan setiap hari."
-            },
-            6: {
-                title: "Bersih Diri",
-                text: "Menjaga kebersihan tubuh untuk kesehatan dan kenyamanan."
-            },
-            7: {
-                title: "Tidur Teratur",
-                text: "Istirahat cukup untuk mendukung aktivitas esok hari."
-            },
-        };
-
-        document.querySelectorAll('.day-item').forEach(item => {
-            item.addEventListener('click', function() {
-
-                document.querySelectorAll('.day-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-
-                let id = this.dataset.day;
-                let content = contents[id];
-
-                document.getElementById('day-content').innerHTML = `
-                <h5 class="fw-bold mb-2">${content.title}</h5>
-                <p>${content.text}</p>
-            `;
-            });
-        });
-    </script>
+    @include('inputHarian.js.create')
+    @include('inputHarian.js.bangun')
+    @include('inputHarian.js.ibadah')
+    @include('inputHarian.js.olahraga')
 @endsection

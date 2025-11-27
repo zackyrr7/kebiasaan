@@ -42,7 +42,9 @@ class GoogleController extends Controller
 
 
         Auth::login($user);
-        $detail = DB::table('user_detail')->where('user_id', $googleUser->id)->first();
+
+        $detail = DB::table('user_detail')->where('user_id', $user->id)->first();
+
         if (!$detail) {
             return redirect()->route('detail.SiswaAwal');
         } else {
@@ -69,6 +71,9 @@ class GoogleController extends Controller
                 'user_id' => Auth::user()->id,
                 'kelas_id' => $request->kelas_id,
                 'role' => 'siswa',
+                'xp' => 0,
+                'streak' => 0,
+                'badge' => 1
             ]);
 
             return response()->json([
